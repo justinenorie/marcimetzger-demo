@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import Image from "next/image";
 import Typography from "../ui/Typography";
 
@@ -24,55 +27,61 @@ const soldData = [
 
 export default function Sold() {
   return (
-    <section className="bg-background">
+    <section className="bg-foreground">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Main Section Header */}
         <div className="mb-16 text-center">
-          <Typography
-            variant="h2"
-            className="text-foreground tracking-[0.3em] uppercase"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            Get It Sold
-          </Typography>
+            <Typography
+              variant="h2"
+              className="text-muted tracking-[0.3em] uppercase"
+            >
+              Get It Sold
+            </Typography>
+          </motion.div>
         </div>
 
-        {/* Content Rows */}
-        <div className="space-y-24 md:space-y-32">
+        <div className="space-y-24">
           {soldData.map((item, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`flex flex-col items-center gap-12 md:flex-row md:gap-20 ${
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className={`flex flex-col items-center gap-10 md:flex-row md:gap-10 ${
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
-              {/* Image Side */}
+              {/* Image side */}
+
               <div className="w-full md:w-1/2">
-                <div className="relative aspect-4/3 w-full overflow-hidden shadow-sm">
+                <div className="relative aspect-video w-full overflow-hidden shadow-sm">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
               </div>
 
-              {/* Text Side */}
-              <div className="w-full text-center md:w-1/2">
-                <Typography
-                  variant="h2"
-                  className="mb-6 text-2xl font-medium text-gray-700 md:text-3xl"
-                >
+              {/* Text side */}
+              <div className="w-full space-y-4 text-center md:w-1/2">
+                <Typography variant="h3" className="text-muted">
                   {item.title}
                 </Typography>
-                <Typography
-                  variant="p"
-                  className="mx-auto max-w-md leading-relaxed text-gray-500"
-                >
+
+                <Typography variant="p" className="text-muted/60">
                   {item.description}
                 </Typography>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import Image from "next/image";
 import Typography from "../ui/Typography";
 import { Button } from "../ui/button";
@@ -15,12 +18,17 @@ export default function Hero() {
         />
       </div>
 
-      <div className="space-y-4 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="space-y-4 text-center"
+      >
         <Typography variant="p" className="text-muted">
           MARCI METZGER - THE RIDGE REALTY GROUP
         </Typography>
 
-        <Typography variant="h1" className="text-muted">
+        <Typography variant="h1" className="text-muted uppercase">
           Pahrump Realtor
         </Typography>
 
@@ -34,7 +42,7 @@ export default function Hero() {
             </Typography>
           </Button>
         </a>
-      </div>
+      </motion.div>
     </section>
   );
 }
